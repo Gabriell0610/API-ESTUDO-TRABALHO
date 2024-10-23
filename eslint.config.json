@@ -1,0 +1,12 @@
+{
+  "files": [
+    "**/*.{js,mjs,cjs,ts}"
+  ],
+  "languageOptions": {
+    "globals": "node"
+  },
+  "extends": [
+    "plugin:@eslint/js/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ]
+}

@@ -1,7 +1,7 @@
-import express from 'express';
-import { categoriesRoutes } from './routes/categories.routes';
-import 'dotenv/config';
-import { specificationsRoutes } from './routes/Specifications.routes';
+import express from "express";
+import "dotenv/config";
+
+import { router } from "./routes";
 
 //SERVER
 const app = express();
@@ -12,5 +12,4 @@ app.listen(process.env.PORT, () =>
   console.log(`Rodando na url: http://localhost:${process.env.PORT}`),
 );
 
-app.use('/categories', categoriesRoutes);
-app.use('/specifications', specificationsRoutes);
+app.use(router);

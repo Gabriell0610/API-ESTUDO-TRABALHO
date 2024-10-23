@@ -1,4 +1,4 @@
-import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
+import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 
 interface IRequet {
   name: string;
@@ -13,7 +13,7 @@ class CreateCategoryUseCase {
     const categoryExists = this.categoryRepository.findByName(name); // Verifica se a categoria já existe
 
     if (categoryExists) {
-      throw new Error('Category already exists');
+      throw new Error("Category already exists");
     }
 
     this.categoryRepository.create({ name, description });

@@ -18,7 +18,7 @@ class ImportCategoryController {
         .json({ message: "Categories imported successfully" });
     } catch (error) {
       if (error === "Category already exists") {
-        return res.status(409).json({ message: error }); // Retorna status 500 e a mensagem de erro
+        return res.status(409).json({ message: error }); // Retorna status 409 = 'conflict' + a a mensagem de erro
       }
       return res.status(500).json({ message: "Internal Server Error" });
     }

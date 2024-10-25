@@ -6,7 +6,7 @@ interface IRequet {
 }
 
 class CreateCategoryUseCase {
-  //Substituição de LISKOV
+  //Substituição de LISKOV & Principio de Inversão de Dependência
   constructor(private categoryRepository: ICategoriesRepository) {}
 
   execute({ name, description }: IRequet) {

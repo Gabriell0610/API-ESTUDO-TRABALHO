@@ -1,8 +1,8 @@
-import CategoryModel from '../../model/Category';
+import CategoryModel from "../../model/Category";
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from '../ICategoriesRepository';
+} from "../ICategoriesRepository";
 
 class CategoriesRepository implements ICategoriesRepository {
   private categoriesDb: CategoryModel[];
@@ -21,10 +21,9 @@ class CategoriesRepository implements ICategoriesRepository {
 
     return CategoriesRepository.INSTANCE;
   }
-  //
 
-  create({ name, description }: ICreateCategoryDTO): CategoryModel[] {
-    const category = new CategoryModel();
+  create({ name, description }: ICreateCategoryDTO): void {
+    const category = new CategoryModel(); // Instanciando o modelo de categoria
 
     Object.assign(category, {
       name,
@@ -33,7 +32,6 @@ class CategoriesRepository implements ICategoriesRepository {
     });
 
     this.categoriesDb.push(category);
-    return this.categoriesDb;
   }
 
   list(): CategoryModel[] {

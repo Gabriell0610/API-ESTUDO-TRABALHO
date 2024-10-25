@@ -67,8 +67,7 @@ class ImportCategoryUseCase {
         })
         .on("end", () => {
           fs.promises.unlink(file.path); // Deleta o arquivo CSV após a importação
-          resolve(); // A importação foi concluída com sucesso
-          console.log("Categories imported successfully");
+          resolve();
         })
         .on("error", (error) => {
           reject(new Error(`Error parsing CSV: ${error.message}`));

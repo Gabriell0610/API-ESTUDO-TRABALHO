@@ -1,5 +1,5 @@
 import { CategoriesRepository } from "../../repositories/Implementations/CategoriesRepository";
-import csvParse from "csv-parse";
+import { parse } from "csv-parse";
 import fs from "fs";
 
 interface IDataCategory {
@@ -52,12 +52,12 @@ class ImportCategoryUseCase {
   async execute(file: Express.Multer.File): Promise<void> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path, { encoding: "utf8" });
-      const parserFile = csvParse.parse();
+      const parserFile = parse();
 
       stream.pipe(parserFile);
 
       parserFile
-        .on("data", (line) => {
+        .on("data", (line: any) => {
           const [name, description] = line;
           const categoryExists = this.categoriesRepository.findByName(name);
           if (categoryExists) {
@@ -69,7 +69,7 @@ class ImportCategoryUseCase {
           fs.promises.unlink(file.path); // Deleta o arquivo CSV após a importação
           resolve();
         })
-        .on("error", (error) => {
+        .on("error", (error: Error) => {
           reject(new Error(`Error parsing CSV: ${error.message}`));
         });
     });

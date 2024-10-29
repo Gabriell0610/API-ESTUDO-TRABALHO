@@ -57,13 +57,17 @@ class ImportCategoryUseCase {
       stream.pipe(parserFile);
 
       parserFile
-        .on("data", (line: any) => {
+        .on("data", async (line: any) => {
           const [name, description] = line;
-          const categoryExists = this.categoriesRepository.findByName(name);
+
+          const categoryExists =
+            await this.categoriesRepository.findByName(name);
+
           if (categoryExists) {
             return reject("Category already exists");
           }
-          this.categoriesRepository.create({ name, description });
+
+          await this.categoriesRepository.create({ name, description });
         })
         .on("end", () => {
           fs.promises.unlink(file.path); // Deleta o arquivo CSV após a importação

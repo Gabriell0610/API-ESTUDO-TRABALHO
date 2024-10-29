@@ -9,14 +9,14 @@ class CreateCategoryUseCase {
   //Substituição de LISKOV & Principio de Inversão de Dependência
   constructor(private categoryRepository: ICategoriesRepository) {}
 
-  execute({ name, description }: IRequet) {
-    const categoryExists = this.categoryRepository.findByName(name); // Verifica se a categoria já existe
+  async execute({ name, description }: IRequet): Promise<void> {
+    const categoryExists = await this.categoryRepository.findByName(name); // Verifica se a categoria já existe
 
     if (categoryExists) {
       throw new Error("Category already exists");
     }
 
-    this.categoryRepository.create({ name, description });
+    await this.categoryRepository.create({ name, description });
   }
 }
 

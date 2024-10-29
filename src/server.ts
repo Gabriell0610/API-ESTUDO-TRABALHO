@@ -3,17 +3,19 @@ import "dotenv/config";
 import swaggerUi from "swagger-ui-express";
 import { router } from "./routes";
 import swaggerFile from "./swagger.json";
-import "./database";
+import { AppDataSource } from "./database/data-source";
 
 //SERVER
 const app = express();
 
 app.use(express.json());
-
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
 app.use(router);
 
-app.listen(process.env.PORT, () =>
-  console.log(`Rodando na url: http://localhost:${process.env.PORT}`),
-);
+// Inicializando o DataSource
+AppDataSource.initialize().then(async () => {
+  console.log("DataSource inicializado com sucesso!");
+  app.listen(process.env.PORT, () =>
+    console.log(`Rodando na url: http://localhost:${process.env.PORT}`),
+  );
+});

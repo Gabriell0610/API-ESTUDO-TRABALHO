@@ -1,15 +1,21 @@
-import { Request, Response } from 'express';
-import { CreateSpecificationUseCase } from './CreateSpecificationUseCase';
-
+import { Request, Response } from "express";
+import { CreateSpecificationUseCase } from "./CreateSpecificationUseCase";
+import { container } from "tsyringe";
 class CreateSpecificationController {
-  constructor(private createSpecificationUseCase: CreateSpecificationUseCase) {}
+  async handle(req: Request, res: Response): Promise<any> {
+    try {
+      const createSpecificationUseCase = container.resolve(
+        CreateSpecificationUseCase,
+      );
 
-  handle(req: Request, res: Response): Response {
-    this.createSpecificationUseCase.execute(req.body);
+      await createSpecificationUseCase.execute(req.body);
 
-    return res
-      .status(201)
-      .json({ message: 'Specification created successfully' });
+      return res
+        .status(201)
+        .json({ message: "Specification created successfully" });
+    } catch (error: any) {
+      return res.status(400).json({ error: error.message });
+    }
   }
 }
 

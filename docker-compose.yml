@@ -5,8 +5,10 @@ services:
     restart: always
     ports:
       - 5432:5432
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=ignite
+      - POSTGRES_DB=rentx
     volumes:
       - pgdata:/var/lib/postgresql/data
   app:
@@ -17,6 +19,10 @@ services:
     env_file:
       - .env
     command: pnpm start
+    depends_on:
+      - database_ignite # Garante que o banco de dados esteja iniciado antes do app
+    environment:
+      - DATABASE_HOST=database_ignite # Adicione esta variável para facilitar a configuração
 
 volumes:
   pgdata:

@@ -81,6 +81,48 @@
                     }
                 }
             }
+        },
+        "/specifications": {
+            "post": {
+                "tags": [
+                    "Specification"
+                ],
+                "summary": "Create a new specification",
+                "description": "Creating a new specification",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Specification"
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "201": {
+                        "description": "Specification created with success"
+                    },
+                    "500": {
+                        "description": "Error Interne at Server"
+                    },
+                    "400": {
+                        "description": "Specification alredy exists"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Specification": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
         }
     }
 }

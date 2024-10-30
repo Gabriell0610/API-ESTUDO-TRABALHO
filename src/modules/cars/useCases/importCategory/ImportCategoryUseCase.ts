@@ -1,4 +1,5 @@
 import { CategoriesRepository } from "../../repositories/Implementations/CategoriesRepository";
+import { inject, injectable } from "tsyringe";
 import { parse } from "csv-parse";
 import fs from "fs";
 
@@ -7,9 +8,8 @@ interface IDataCategory {
   description: string;
 }
 
+@injectable()
 class ImportCategoryUseCase {
-  constructor(private categoriesRepository: CategoriesRepository) {}
-
   // loadFiles(file: Express.Multer.File): Promise<IDataCategory[]> {
   //   return new Promise((resolve, reject) => {
   //     const stream = fs.createReadStream(file.path, { encoding: "utf8" }); // Método responsável por fazer a leitura do arquivo em partes
@@ -48,6 +48,11 @@ class ImportCategoryUseCase {
   //     }
   //   });
   // }
+
+  constructor(
+    @inject("CategoriesRepository")
+    private categoriesRepository: CategoriesRepository,
+  ) {}
 
   async execute(file: Express.Multer.File): Promise<void> {
     return new Promise((resolve, reject) => {

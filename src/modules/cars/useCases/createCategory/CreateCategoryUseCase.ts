@@ -1,13 +1,17 @@
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
-
+import { inject, injectable } from "tsyringe";
 interface IRequet {
   name: string;
   description: string;
 }
 
+@injectable()
 class CreateCategoryUseCase {
   //Substituição de LISKOV & Principio de Inversão de Dependência
-  constructor(private categoryRepository: ICategoriesRepository) {}
+  constructor(
+    @inject("CategoriesRepository")
+    private categoryRepository: ICategoriesRepository,
+  ) {}
 
   async execute({ name, description }: IRequet): Promise<void> {
     const categoryExists = await this.categoryRepository.findByName(name); // Verifica se a categoria já existe

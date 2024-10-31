@@ -19,6 +19,9 @@ services:
     env_file:
       - .env
     command: pnpm start
+    volumes:
+      - .:/usr/app # Mapeia o diretório local para o contêiner
+      - /usr/app/node_modules # Evita conflitos de node_modules entre host e contêiner
     depends_on:
       - database_ignite # Garante que o banco de dados esteja iniciado antes do app
     environment:

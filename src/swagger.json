@@ -98,7 +98,7 @@
                         }
                     }
                 },
-                "response": {
+                "responses": {
                     "201": {
                         "description": "Specification created with success"
                     },

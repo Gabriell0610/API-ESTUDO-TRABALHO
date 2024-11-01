@@ -3,16 +3,16 @@ import { Entity, Column, CreateDateColumn, PrimaryColumn } from "typeorm";
 
 @Entity("categories")
 class CategoryModel {
-  @Column({ primary: true })
+  @Column({ primary: true }) // Define a coluna como chave primária.
   id?: string;
 
-  @Column()
+  @Column() // Define a coluna como uma string.
   name!: string;
 
   @Column()
   description!: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn() // Define a coluna como uma data e hora.
   createdAt!: Date;
 
   constructor() {

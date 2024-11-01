@@ -4,11 +4,11 @@ import { container } from "tsyringe";
 class CreateCategoryController {
   async handle(req: Request, res: Response): Promise<any> {
     try {
-      const createCategoriesUseCase = container.resolve(CreateCategoryUseCase);
-      await createCategoriesUseCase.execute(req.body);
-      return res.status(201).json({ message: "Category created successfully" });
+      const createCategoriesUseCase = container.resolve(CreateCategoryUseCase); // Resolução da inversão de dependência
+      await createCategoriesUseCase.execute(req.body); // Executando o use case
+      return res.status(201).json({ message: "Category created successfully" }); // Retornando status 201 e mensagem de sucesso
     } catch (error: any) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({ error: error.message }); // Retornando status 400 e o erro caso ocorra
     }
   }
 }

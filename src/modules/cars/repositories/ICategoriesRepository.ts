@@ -1,4 +1,4 @@
-import { CategoryModel } from "../model/Category";
+import { CategoryModel } from "../infra/typeorm/model/Category";
 
 //DTO
 interface ICreateCategoryDTO {
@@ -7,7 +7,7 @@ interface ICreateCategoryDTO {
 }
 
 interface ICategoriesRepository {
-  findByName(name: string): Promise<CategoryModel | null>;
+  findByName(name: string): Promise<CategoryModel | undefined>;
   create({ name, description }: ICreateCategoryDTO): Promise<void>;
   list(): Promise<CategoryModel[]>;
 }

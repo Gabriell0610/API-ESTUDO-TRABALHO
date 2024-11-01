@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { UpdateUserAvatarUseCase } from "./UpdateUserAvatarUseCase";
-import { AppError } from "../../../../errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 
 class UpdateUserAvatarController {
   async handle(req: Request, res: Response): Promise<any> {

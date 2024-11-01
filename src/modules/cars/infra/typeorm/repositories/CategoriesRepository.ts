@@ -1,11 +1,11 @@
-import { CategoryModel } from "../../model/Category";
+import { CategoryModel } from "../../../infra/typeorm/model/Category";
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from "../ICategoriesRepository";
+} from "../../../repositories/ICategoriesRepository";
 
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../../../database/data-source";
+import { AppDataSource } from "../../../../../shared/http/database/data-source";
 
 class CategoriesRepository implements ICategoriesRepository {
   // private categoriesDb: CategoryModel[];
@@ -53,11 +53,16 @@ class CategoriesRepository implements ICategoriesRepository {
     return categories; // retornando as categorias
   }
 
-  async findByName(name: string): Promise<CategoryModel | null> {
+  async findByName(name: string): Promise<CategoryModel | undefined> {
     // const categoryExists = this.categoriesDb.find((c) => c.name === name);
     // return categoryExists;
 
     const categoryExists = await this.repository.findOne({ where: { name } }); // buscando a categoria pelo nome no banco de dados
+
+    if (!categoryExists) {
+      return undefined; // retornando undefined caso a categoria não exista
+    }
+
     return categoryExists; // retornando a categoria caso exista
   }
 }

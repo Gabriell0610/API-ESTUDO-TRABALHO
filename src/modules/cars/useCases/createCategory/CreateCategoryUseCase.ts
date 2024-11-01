@@ -1,3 +1,4 @@
+import { AppError } from "../../../../shared/errors/AppError";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 import { inject, injectable } from "tsyringe";
 interface IRequet {
@@ -17,7 +18,7 @@ class CreateCategoryUseCase {
     const categoryExists = await this.categoryRepository.findByName(name); // Verifica se a categoria já existe
 
     if (categoryExists) {
-      throw new Error("Category already exists");
+      throw new AppError("Category already exists", 400);
     }
 
     await this.categoryRepository.create({ name, description });

@@ -1,11 +1,11 @@
-import { SpecificationModel } from "../../model/Specification";
+import { SpecificationModel } from "../../../infra/typeorm/model/Specification";
 import {
   ICreateSpecificationDTO,
   ISpecificationRepository,
-} from "../ISpecificationRepository";
+} from "../../../repositories/ISpecificationRepository";
 
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../../../database/data-source";
+import { AppDataSource } from "../../../../../shared/http/database/data-source";
 class SpecificationRepository implements ISpecificationRepository {
   private repository: Repository<SpecificationModel>;
 

@@ -1,7 +1,7 @@
 import { container } from "tsyringe";
 import { AuthenticanteUserUseCase } from "../../useCase/authenticateUser/AuthenticateUserUseCase";
 import { Request, Response } from "express";
-import { AppError } from "../../../../errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 class AuthenticanteUserController {
   async handle(req: Request, res: Response): Promise<any> {
     try {

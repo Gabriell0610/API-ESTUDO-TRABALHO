@@ -11,13 +11,13 @@ class UpdateUserAvatarController {
       );
 
       //Pegando o id do usuario pelo Token
-      const { id } = req.user;
+      const userId = res.locals.userId;
 
       //Pegando o arquivo pela requisição da rota
       const avatarFile = req.file!.filename;
 
       //Passando o id e o arquivo para o use case
-      await updateUserAvatarUseCase.execute({ userId: id, avatarFile });
+      await updateUserAvatarUseCase.execute({ userId, avatarFile });
       return res.status(200).json({ message: "Avatar updated successfully" });
     } catch (error) {
       if (error instanceof AppError) {

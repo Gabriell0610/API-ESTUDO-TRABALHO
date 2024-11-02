@@ -20,18 +20,17 @@ export async function ensureAuthenticated(
   const token = authHeader.replace("Bearer ", "");
 
   try {
-    const { sub: user_id } = verify(token, "secret") as ITokenPayload;
-    const userRepository = new UserRepository();
+    const { sub: user_id } = verify(token, "secret") as ITokenPayload; // pegando id do pay load e verificando o token
 
+    //Verificando se o usuário existe no banco de dados usando o ID do token
+    const userRepository = new UserRepository();
     const user = await userRepository.findById(user_id);
     if (!user) {
       throw new AppError("user not found", 401);
     }
 
     //Criando uma propriedade de request para armazenar o ID do usuário
-    req.user = {
-      id: user_id,
-    };
+    res.locals.userId = user_id;
 
     next();
   } catch (error) {

@@ -4,8 +4,9 @@ import {
 } from "../../../repositories/IUserRepository";
 
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../../../../shared/http/database/data-source";
+import { AppDataSource } from "../../../../../shared/database/data-source";
 import { UserModel } from "../model/User";
+import { AppError } from "../../../../../shared/errors/AppError";
 
 class UserRepository implements IUserRepository {
   private repository: Repository<UserModel>;
@@ -31,7 +32,7 @@ class UserRepository implements IUserRepository {
   async findById(id: string): Promise<UserModel | undefined> {
     const userExists = await this.repository.findOne({ where: { id } });
     if (!userExists) {
-      return undefined; // Caso não exista um usuário com este id, retorna undefined
+      throw new AppError("User not found", 404);
     }
     return userExists;
   }

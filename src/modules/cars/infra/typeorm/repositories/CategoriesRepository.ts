@@ -5,7 +5,7 @@ import {
 } from "../../../repositories/ICategoriesRepository";
 
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../../../../shared/http/database/data-source";
+import { AppDataSource } from "../../../../../shared/database/data-source";
 
 class CategoriesRepository implements ICategoriesRepository {
   // private categoriesDb: CategoryModel[];

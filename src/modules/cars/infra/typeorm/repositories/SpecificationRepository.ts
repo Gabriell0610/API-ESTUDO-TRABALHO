@@ -5,7 +5,7 @@ import {
 } from "../../../repositories/ISpecificationRepository";
 
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../../../../shared/http/database/data-source";
+import { AppDataSource } from "../../../../../shared/database/data-source";
 class SpecificationRepository implements ISpecificationRepository {
   private repository: Repository<SpecificationModel>;
 

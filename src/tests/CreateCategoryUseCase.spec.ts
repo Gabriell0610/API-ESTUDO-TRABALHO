@@ -7,7 +7,7 @@ let categoriesRepositoryMock: CategoriesRepositoryInMemory; // Mockando o reposi
 
 describe("Create Category ", () => {
   beforeEach(() => {
-    // Configurações iniciais
+    // método que será executado antes de cada teste
     categoriesRepositoryMock = new CategoriesRepositoryInMemory();
     createCategoryUseCase = new CreateCategoryUseCase(categoriesRepositoryMock);
   });

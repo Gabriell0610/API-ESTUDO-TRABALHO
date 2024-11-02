@@ -21,7 +21,7 @@ class CreateUserUseCase {
       throw new AppError("User already exists", 409);
     }
 
-    const hashedPassword = await hash(data.password, 10); // Hashing the password using bcrypt
+    const hashedPassword = await hash(data.password, 10); // Fazendo o hash da senha
     data.password = hashedPassword;
 
     await this.userRepository.create(data);

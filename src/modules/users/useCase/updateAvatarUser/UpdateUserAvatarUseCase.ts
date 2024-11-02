@@ -23,14 +23,14 @@ class UpdateUserAvatarUseCase {
         throw new AppError("User not found", 404);
       }
 
-      //Verifica se o avatar já existe e deleta caso exista
+      //Verifica se o avatar já existe e deleta e é feito a troca com um novo arquivo
       if (user.avatar) {
         await deleteFile(`./tmp/avatar/${user?.avatar}`);
       }
 
       user.avatar = avatarFile; // Salva o novo avatar no usuário
 
-      await this.userRepository.create(user);
+      await this.userRepository.create(user); // Salva o usuário atualizado no banco de dados
     } catch (error) {
       if (error instanceof AppError)
         throw new AppError(error.message, error.statusCode);

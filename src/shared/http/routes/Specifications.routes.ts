@@ -5,6 +5,7 @@ import { ensureAuthenticated } from "../middleware/ensureAuthenticated";
 
 const specificationsRoutes = Router();
 
+specificationsRoutes.use(ensureAuthenticated);
 const createSpecificationController = new CreateSpecificationController();
 const listSpecificationController = new ListSpecificationController();
 

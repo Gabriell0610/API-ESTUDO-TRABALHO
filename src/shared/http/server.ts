@@ -16,15 +16,15 @@ app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(router);
 
-// app.use((err: Error, req: Request, res: any, next: NextFunction) => {
-//   if (err instanceof AppError) {
-//     return res.status(err.statusCode).json({ message: err.message });
-//   }
+app.use((err: Error, req: Request, res: any, next: NextFunction) => {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({ message: err.message });
+  }
 
-//   return res
-//     .status(500)
-//     .json({ message: "Internal Server Error - " + err.message });
-// });
+  return res
+    .status(500)
+    .json({ message: "Internal Server Error - " + err.message });
+});
 
 // Inicializando o DataSource
 AppDataSource.initialize().then(async () => {

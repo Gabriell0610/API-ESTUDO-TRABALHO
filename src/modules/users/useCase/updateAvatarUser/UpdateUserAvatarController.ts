@@ -8,7 +8,7 @@ class UpdateUserAvatarController {
     const updateUserAvatarUseCase = container.resolve(UpdateUserAvatarUseCase);
 
     //Pegando o id do usuario pelo Token
-    const userId = res.locals.userId;
+    const userId = req.userId;
 
     //Pegando o arquivo pela requisição da rota
     const avatarFile = req.file!.filename;

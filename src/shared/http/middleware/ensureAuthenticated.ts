@@ -29,8 +29,8 @@ export async function ensureAuthenticated(
       throw new AppError("user not found", 401);
     }
 
-    //Criando uma propriedade de request para armazenar o ID do usuário
-    res.locals.userId = user_id;
+    //Criando uma propriedade de response para armazenar o ID do usuário
+    req.userId = user_id;
 
     next();
   } catch (error) {
